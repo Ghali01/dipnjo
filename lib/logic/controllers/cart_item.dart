@@ -113,8 +113,8 @@ class CartItemCubit extends Cubit<CartItemState> {
           .toList()
           .map((e) => e['id'])
           .toList();
-      await OrderAPI.addItemToCart(
-          state.food!['id'], state.count, state.freeItems, additions);
+      await OrderAPI.addItemToCart(state.food!['id'], state.count,
+          state.freeItems, additions, state.note);
       emit(state.copyWith(loading: false, done: true));
     } catch (e) {
       print(e);

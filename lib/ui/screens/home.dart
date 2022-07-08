@@ -38,32 +38,36 @@ class HomePage extends StatelessWidget {
               child: ListView(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    'Delivering To',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey.shade700,
-                    ),
-                  ).tr(),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.location_on_outlined,
-                        color: AppColors.brown1,
-                        size: 32,
-                      ),
-                      Text(
-                        'Dahiet-Alrasheed ...',
-                        style: const TextStyle(
-                            fontSize: 20,
-                            color: AppColors.brown1,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+                  ...(state.location != null
+                      ? [
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            'Delivering To',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey.shade700,
+                            ),
+                          ).tr(),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on_outlined,
+                                color: AppColors.brown1,
+                                size: 32,
+                              ),
+                              Text(
+                                state.location!,
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    color: AppColors.brown1,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                        ]
+                      : []),
                   const SizedBox(
                     height: 16,
                   ),

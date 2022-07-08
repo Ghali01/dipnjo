@@ -53,11 +53,15 @@ class FavoriteFoodsPage extends StatelessWidget {
                       controller: genScrollController(
                           context.read<FavoriteFoodsCubit>()),
                       itemCount: state.foods.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: .55,
-                              crossAxisSpacing: 10),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount:
+                            MediaQuery.of(context).size.width >= 600 ? 3 : 2,
+                        childAspectRatio:
+                            MediaQuery.of(context).size.width >= 600
+                                ? 0.55
+                                : 0.50,
+                        crossAxisSpacing: 10,
+                      ),
                       itemBuilder: (_, index) =>
                           FoodItem(food: state.foods[index]),
                     ),

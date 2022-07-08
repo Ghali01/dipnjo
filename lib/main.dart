@@ -2,13 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user/db/notification.dart';
 import 'package:user/firebase_options.dart';
 import 'package:user/logic/providers/account.dart';
 import 'package:user/utilities/colors.dart';
 import 'package:user/utilities/routes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'utilities/notifications.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,12 +23,26 @@ void main() async {
   FirebaseMessaging.instance.onTokenRefresh
       .listen((fcmToken) => AccountAPI.SetFCMToken(fcmToken))
       .onError(print);
+
+  await initNoitification();
+  FirebaseMessaging.onMessage
+      .listen((msg) => handleNotification(msg).then((value) => null));
+  FirebaseMessaging.onBackgroundMessage(handleNotification);
+  await Hive.initFlutter();
+  Hive.registerAdapter(NotificationModelAdapter());
+  await Hive.openBox<NotificationModel>('notifications');
+  print(await FirebaseMessaging.instance.getToken());
+  // print(FirebaseAuth.instance.currentUser!);
   // AccountAPI.SetFCMToken((await FirebaseMessaging.instance.getToken())!);
   // FirebaseAuth.instance.signOut();
+  // SharedPreferences sp = await SharedPreferences.getInstance();
+  // sp.remove('currentLocationId');
+  // sp.remove('userPhone');
+
   runApp(
     EasyLocalization(
       path: 'assets/translations',
-      saveLocale: false,
+      saveLocale: true,
       startLocale: const Locale('en'),
       supportedLocales: const [Locale('ar'), Locale('en')],
       child: const App(),
@@ -39,6 +58,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
+      locale: context.locale,
       initialRoute: RoutesGenerater.main,
       onGenerateRoute: RoutesGenerater.generator,
       theme: ThemeData(

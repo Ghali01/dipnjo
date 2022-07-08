@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,6 +44,7 @@ class VerifyPhoneCubit extends Cubit<VerifyPhoneState> {
       var cred = await PhoneAuthProvider.credential(
           verificationId: state.vfId, smsCode: code);
       await FirebaseAuth.instance.signInWithCredential(cred);
+      SharedPreferences sp = await SharedPreferences.getInstance();
       if (flag == VerifyPhoneFlag.register) {
         await AccountAPI.post(
             token: FirebaseAuth.instance.currentUser!.uid,
@@ -51,8 +53,23 @@ class VerifyPhoneCubit extends Cubit<VerifyPhoneState> {
             gender: user.gender,
             birth: user.birth,
             phone: user.phone);
+        sp.setString('userPhone', user.phone);
+      } else {
+        String rawData = await AccountAPI.login();
+        var data = jsonDecode(rawData);
+        if (data['phone'] != null) {
+          sp.setString('userPhone', data['phone']);
+        }
+        if (data['location'] != null) {
+          sp.setInt('currentLocationId', data['location']['id']);
+          sp.setString('currentLocationName', data['location']['name']);
+          sp.setString('currentLocationDetails', data['location']['details']);
+          sp.setDouble(
+              'currentLocationLat', double.parse(data['location']['lat']));
+          sp.setDouble(
+              'currentLocationLng', double.parse(data['location']['lng']));
+        }
       }
-      SharedPreferences sp = await SharedPreferences.getInstance();
       sp.setBool('logedin', true);
       sp.setInt('authMethod', 2);
       emit(state.copyWith(verifed: true, loading: false));

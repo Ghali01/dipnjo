@@ -20,7 +20,10 @@ class LoginPhonePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset('assets/images/auth_bg3.png', fit: BoxFit.fill),
+          SizedBox(
+              width: double.infinity,
+              child:
+                  Image.asset('assets/images/auth_bg3.png', fit: BoxFit.fill)),
           Column(
             children: [
               Expanded(

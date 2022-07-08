@@ -37,7 +37,6 @@ class MenuPage extends StatelessWidget {
           !cubit.state.loading &&
           controller.offset >= controller.position.maxScrollExtent &&
           !controller.position.outOfRange) {
-        print('5');
         cubit.loadMoreFoods().then((value) => null);
       }
     });
@@ -46,6 +45,7 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
     return BlocProvider(
       create: (context) => MenuCubit(args.type),
       child: Scaffold(
@@ -126,10 +126,17 @@ class MenuPage extends StatelessWidget {
                                 genScrollController(context.read<MenuCubit>()),
                             itemCount: state.foods.length,
                             gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: .55,
-                                    crossAxisSpacing: 10),
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount:
+                                  MediaQuery.of(context).size.width >= 600
+                                      ? 3
+                                      : 2,
+                              childAspectRatio:
+                                  MediaQuery.of(context).size.width >= 600
+                                      ? 0.55
+                                      : 0.50,
+                              crossAxisSpacing: 10,
+                            ),
                             itemBuilder: (_, index) =>
                                 args.type == MenuType.points
                                     ? OfferPointsItem2(food: state.foods[index])

@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_codes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:user/ui/screens/cart_item.dart';
 import 'package:user/utilities/colors.dart';
 import 'package:user/utilities/server.dart';
@@ -23,7 +24,7 @@ class OfferPointsItem extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset(
-              'assets/images/op.png',
+              'assets/images/op-${context.locale.languageCode}.png',
               fit: BoxFit.fill,
             ),
             Row(

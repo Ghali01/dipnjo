@@ -4,7 +4,7 @@ import 'package:user/utilities/server.dart';
 
 class FoodAPI {
   static Future<String> getCategories() async {
-    http.Response response = await Server.send(http.get, 'foods/category');
+    http.Response response = await Server.send(http.get, 'foods/category-user');
     if (response.statusCode == 200) {
       return utf8.decode(response.bodyBytes);
     }
@@ -30,6 +30,7 @@ class FoodAPI {
 
   static Future<String> getAds() async {
     http.Response response = await Server.send(http.get, 'foods/advertise');
+
     if (response.statusCode == 200) {
       return utf8.decode(response.bodyBytes);
     }

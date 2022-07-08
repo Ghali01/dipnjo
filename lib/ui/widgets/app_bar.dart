@@ -1,9 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:user/utilities/colors.dart';
+import 'package:user/utilities/routes.dart';
 
 class AppAppBar extends StatelessWidget {
   final String title;
-  const AppAppBar({Key? key, required this.title}) : super(key: key);
+  final bool inNotificiation;
+  const AppAppBar({Key? key, required this.title, this.inNotificiation = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,15 +16,20 @@ class AppAppBar extends StatelessWidget {
         title,
         style: const TextStyle(
             color: AppColors.brown4, fontWeight: FontWeight.bold),
-      ),
+      ).tr(),
       centerTitle: true,
       actions: [
-        IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.notifications_on_outlined,
-              size: 32,
-            ))
+        !inNotificiation
+            ? IconButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(RoutesGenerater.notifications);
+                },
+                icon: const Icon(
+                  Icons.notifications_on_outlined,
+                  size: 32,
+                ))
+            : const SizedBox()
       ],
       leading: Navigator.of(context).canPop()
           ? Padding(
@@ -33,7 +42,9 @@ class AppAppBar extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: AppColors.brown3,
                       borderRadius: BorderRadius.circular(100)),
-                  child: const Icon(Icons.arrow_back_ios_new),
+                  child: Icon(context.locale.languageCode == 'en'
+                      ? Icons.arrow_back_ios_new
+                      : Icons.arrow_back),
                 ),
               ),
             )

@@ -54,7 +54,10 @@ class VerifyPhone extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset('assets/images/auth_bg2.png', fit: BoxFit.fill),
+          SizedBox(
+              width: double.infinity,
+              child:
+                  Image.asset('assets/images/auth_bg2.png', fit: BoxFit.fill)),
           Column(
             children: [
               Expanded(

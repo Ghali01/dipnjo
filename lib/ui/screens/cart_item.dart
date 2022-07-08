@@ -313,24 +313,29 @@ class CartItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/svg/note.svg',
-                              width: 30,
-                              height: 30,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            const Text(
-                              'Any Special Request',
-                              style: TextStyle(
-                                color: AppColors.brown4,
-                                fontSize: 20,
+                        Expanded(
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/svg/note.svg',
+                                width: 30,
+                                height: 30,
                               ),
-                            ).tr(),
-                          ],
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                child: const Text(
+                                  'Any Special Request',
+                                  softWrap: true,
+                                  style: TextStyle(
+                                    color: AppColors.brown4,
+                                    fontSize: 20,
+                                  ),
+                                ).tr(),
+                              ),
+                            ],
+                          ),
                         ),
                         TextButton(
                           onPressed: () async {
@@ -349,9 +354,12 @@ class CartItem extends StatelessWidget {
                             'Add Note',
                             style: TextStyle(
                               color: AppColors.gold1,
-                              fontSize: 20,
+                              fontSize: 16,
                             ),
                           ).tr(),
+                          style: ButtonStyle(
+                              overlayColor: MaterialStateProperty.all(
+                                  AppColors.brown2.withOpacity(.3))),
                         ),
                       ],
                     ),

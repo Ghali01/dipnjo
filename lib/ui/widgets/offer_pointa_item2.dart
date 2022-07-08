@@ -42,16 +42,17 @@ class OfferPointsItem2 extends StatelessWidget {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                food['name'],
-                softWrap: false,
-                overflow: TextOverflow.fade,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
+              Expanded(
+                child: Text(
+                  food['name'],
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Row(

@@ -45,29 +45,31 @@ class FoodItem extends StatelessWidget {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                food['name'],
-                softWrap: false,
-                overflow: TextOverflow.fade,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
+              Expanded(
+                child: Text(
+                  food['name'],
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Let's Go",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  Icon(
+                    style: TextStyle(fontSize: 13),
+                  ).tr(),
+                  const Icon(
                     Icons.arrow_forward,
-                    size: 22,
+                    size: 19,
                   ),
                 ],
               ),

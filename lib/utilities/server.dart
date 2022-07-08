@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Server {
-  static const String host = '10.0.2.2:8000';
+  // static const String host = '10.0.2.2:8000';
+  static const String host = 'ghale02.pythonanywhere.com';
   // static const String host = '192.168.1.7:8000';
   static const String protocol = 'http';
   static Future<http.Response> send(Function method, String path,
