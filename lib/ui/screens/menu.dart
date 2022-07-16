@@ -45,7 +45,7 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
+    // print(MediaQuery.of(context).size.width);
     return BlocProvider(
       create: (context) => MenuCubit(args.type),
       child: Scaffold(
@@ -134,7 +134,9 @@ class MenuPage extends StatelessWidget {
                               childAspectRatio:
                                   MediaQuery.of(context).size.width >= 600
                                       ? 0.55
-                                      : 0.50,
+                                      : MediaQuery.of(context).size.width >= 350
+                                          ? 0.50
+                                          : 0.40,
                               crossAxisSpacing: 10,
                             ),
                             itemBuilder: (_, index) =>

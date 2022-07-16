@@ -14,7 +14,6 @@ class AccountAPI {
     String? email,
     required String token,
     required String name,
-    required String city,
     required String gender,
     required String birth,
   }) async {
@@ -30,11 +29,11 @@ class AccountAPI {
       'phone':
           phone?.replaceAll(' ', '').replaceAll('+', '').replaceAll('-', ''),
       'email': email,
-      'city': city,
       'gender': gender,
       'birth': birth
     });
     print(response.body);
+    print(response.statusCode);
     if (response.statusCode == 201) {
       await FirebaseAuth.instance.currentUser!.updateDisplayName(name);
       return true;

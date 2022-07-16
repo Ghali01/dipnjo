@@ -43,18 +43,21 @@ class MenuCubit extends Cubit<MenuState> {
   Future<void> loadMoreFoods() async {
     try {
       emit(state.copyWith(loading: true));
-      String rawData = await FoodAPI.getFoodSearch(
+      List r = await FoodAPI.getFoodSearch(
           type.path, state.search, state.currentCategory, state.page);
-      List data = jsonDecode(rawData);
-      List items = [...(state.foods), ...data];
-      emit(
-        state.copyWith(
-          foods: items,
-          page: state.page + 1,
-          loading: false,
-          noMore: data.length < 20,
-        ),
-      );
+      if (r[1] == state.search && r[2] == state.currentCategory) {
+        String rawData = r[0];
+        List data = jsonDecode(rawData);
+        List items = [...(state.foods), ...data];
+        emit(
+          state.copyWith(
+            foods: items,
+            page: state.page + 1,
+            loading: false,
+            noMore: data.length < 20,
+          ),
+        );
+      }
     } catch (e) {
       print(e);
     }

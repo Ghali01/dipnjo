@@ -211,7 +211,7 @@ class CartItem extends StatelessWidget {
                                       style: const TextStyle(
                                         decoration: TextDecoration.lineThrough,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                       ),
                                     ),
                                   )
@@ -221,7 +221,7 @@ class CartItem extends StatelessWidget {
                               style: TextStyle(
                                 // color: AppColors.gold1,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 22,
+                                fontSize: 20,
                               ),
                             ).tr(args: [state.price.toString()]),
                             state.food!['offer'] != null &&
@@ -235,7 +235,7 @@ class CartItem extends StatelessWidget {
                                       style: TextStyle(
                                         color: Colors.red.shade900,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                       ),
                                     ),
                                   )
@@ -245,7 +245,7 @@ class CartItem extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: 32,
+                      height: 24,
                     ),
                     const Text(
                       'Additions ?',

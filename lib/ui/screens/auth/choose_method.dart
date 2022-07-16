@@ -154,11 +154,15 @@ class ChooesMethodPage extends StatelessWidget {
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
+                                  Text(
                                     'Do You Have An Account? ',
                                     style: TextStyle(
                                         color: Colors.grey,
-                                        fontSize: 16,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width >=
+                                                    380
+                                                ? 16
+                                                : 14,
                                         fontWeight: FontWeight.w500),
                                   ).tr(),
                                   InkWell(
@@ -168,11 +172,16 @@ class ChooesMethodPage extends StatelessWidget {
                                       arguments: ChooesMethodArgs(
                                           intent: ChooesMethodIntent.login),
                                     ),
-                                    child: const Text(
+                                    child: Text(
                                       'Log in',
                                       style: TextStyle(
                                           color: AppColors.gold1,
-                                          fontSize: 16,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >=
+                                                  380
+                                              ? 16
+                                              : 14,
                                           fontWeight: FontWeight.w500),
                                     ).tr(),
                                   ),
@@ -181,11 +190,15 @@ class ChooesMethodPage extends StatelessWidget {
                             : Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
+                                  Text(
                                     "D'not You Have An Account? ",
                                     style: TextStyle(
                                         color: Colors.grey,
-                                        fontSize: 16,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width >=
+                                                    380
+                                                ? 16
+                                                : 14,
                                         fontWeight: FontWeight.w500),
                                   ).tr(),
                                   InkWell(
@@ -195,11 +208,16 @@ class ChooesMethodPage extends StatelessWidget {
                                       arguments: ChooesMethodArgs(
                                           intent: ChooesMethodIntent.register),
                                     ),
-                                    child: const Text(
+                                    child: Text(
                                       'Register',
                                       style: TextStyle(
                                           color: AppColors.gold1,
-                                          fontSize: 16,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >=
+                                                  380
+                                              ? 16
+                                              : 14,
                                           fontWeight: FontWeight.w500),
                                     ).tr(),
                                   ),

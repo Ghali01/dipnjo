@@ -1,12 +1,10 @@
 class RegisterUser {
   String name;
-  String city;
   String gender;
   String birth;
   RegisterUser({
     required this.name,
     required this.birth,
-    required this.city,
     required this.gender,
   });
 }
@@ -17,9 +15,8 @@ class RegisterPhoneUser extends RegisterUser {
     required this.phone,
     required String name,
     required String birth,
-    required String city,
     required String gender,
-  }) : super(name: name, birth: birth, city: city, gender: gender);
+  }) : super(name: name, birth: birth, gender: gender);
 }
 
 class RegisterEmailUser extends RegisterUser {
@@ -31,7 +28,6 @@ class RegisterEmailUser extends RegisterUser {
     required this.email,
     required String name,
     required String birth,
-    required String city,
     required String gender,
-  }) : super(name: name, birth: birth, city: city, gender: gender);
+  }) : super(name: name, birth: birth, gender: gender);
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user/logic/models/loginEmail.dart';
@@ -27,6 +28,10 @@ class LoginEmailCubit extends Cubit<LoginEmailState> {
             'currentLocationLat', double.parse(data['location']['lat']));
         sp.setDouble(
             'currentLocationLng', double.parse(data['location']['lng']));
+      }
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+      if (fcmToken != null) {
+        AccountAPI.SetFCMToken(fcmToken);
       }
       emit(state.copyWith(goNext: true, loading: false));
     } on FirebaseAuthException catch (e) {

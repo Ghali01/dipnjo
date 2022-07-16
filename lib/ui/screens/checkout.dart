@@ -24,7 +24,7 @@ class CheckoutArgs {
 class CheckoutPage extends StatelessWidget {
   CheckoutArgs args;
   CheckoutPage({Key? key, required this.args}) : super(key: key);
-  TextEditingController promo = TextEditingController(text: 'sba');
+  TextEditingController promo = TextEditingController();
   void _setTime(BuildContext context) async {
     TimeOfDay? time = await showTimePicker(
         context: context,
@@ -253,7 +253,12 @@ class CheckoutPage extends StatelessWidget {
                                           ? _timeFormat(state)
                                           : 'As Soon As Possible',
                                       style: TextStyle(
-                                          fontSize: 22,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >=
+                                                  400
+                                              ? 22
+                                              : 18,
                                           fontWeight: FontWeight.bold),
                                     ).tr()
                                   ],
@@ -464,10 +469,15 @@ class CheckoutPage extends StatelessWidget {
                                     const SizedBox(
                                       width: 8,
                                     ),
-                                    const Text(
+                                    Text(
                                       'Receive From The Shop',
                                       style: TextStyle(
-                                          fontSize: 19,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >=
+                                                  400
+                                              ? 19
+                                              : 13,
                                           fontWeight: FontWeight.w600),
                                     ).tr()
                                   ],

@@ -10,6 +10,9 @@ class MainAuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height.toString() +
+        'x' +
+        MediaQuery.of(context).size.width.toString());
     return Scaffold(
       body: Column(
         children: [
@@ -24,7 +27,9 @@ class MainAuthPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Expanded(flex: 2, child: SizedBox()),
+                    Expanded(
+                        flex: MediaQuery.of(context).size.height >= 600 ? 2 : 1,
+                        child: const SizedBox()),
                     Expanded(
                         flex: 1,
                         child: Padding(
@@ -36,14 +41,21 @@ class MainAuthPage extends StatelessWidget {
                                 tr('homeTitle'),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 32, fontWeight: FontWeight.w600),
+                                    fontSize:
+                                        MediaQuery.of(context).size.width >= 380
+                                            ? 32
+                                            : 24,
+                                    fontWeight: FontWeight.w600),
                               ),
                               Text(
                                 tr('homeSubtitle'),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: AppColors.brown1,
-                                    fontSize: 19,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width >= 380
+                                            ? 19
+                                            : 16,
                                     fontWeight: FontWeight.w500),
                               )
                             ],

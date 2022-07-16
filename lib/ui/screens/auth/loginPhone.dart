@@ -15,6 +15,7 @@ class LoginPhonePage extends StatelessWidget {
   // ghale001.wrok@gmail.com
   final TextEditingController controller =
       TextEditingController(text: '+1 650-555-1234');
+  // TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user/logic/models/registerEmail.dart';
@@ -15,11 +16,13 @@ class RegisterEmailCubit extends Cubit<RegisterEmailState> {
       await AccountAPI.post(
           token: FirebaseAuth.instance.currentUser!.uid,
           name: user.name,
-          city: user.city,
           gender: user.gender,
           birth: user.birth,
           email: user.email);
-
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+      if (fcmToken != null) {
+        AccountAPI.SetFCMToken(fcmToken);
+      }
       SharedPreferences sp = await SharedPreferences.getInstance();
       sp.setBool('logedin', true);
       sp.setInt('authMethod', 1);

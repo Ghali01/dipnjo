@@ -23,14 +23,13 @@ void main() async {
   FirebaseMessaging.instance.onTokenRefresh
       .listen((fcmToken) => AccountAPI.SetFCMToken(fcmToken))
       .onError(print);
-
+  // await FirebaseMessaging.instance.subscribeToTopic('user');
   await initNoitification();
   FirebaseMessaging.onMessage
       .listen((msg) => handleNotification(msg).then((value) => null));
   FirebaseMessaging.onBackgroundMessage(handleNotification);
   await Hive.initFlutter();
   Hive.registerAdapter(NotificationModelAdapter());
-  await Hive.openBox<NotificationModel>('notifications');
   print(await FirebaseMessaging.instance.getToken());
   // print(FirebaseAuth.instance.currentUser!);
   // AccountAPI.SetFCMToken((await FirebaseMessaging.instance.getToken())!);

@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user/logic/models/verifyPhone.dart';
@@ -49,7 +50,6 @@ class VerifyPhoneCubit extends Cubit<VerifyPhoneState> {
         await AccountAPI.post(
             token: FirebaseAuth.instance.currentUser!.uid,
             name: user!.name,
-            city: user.city,
             gender: user.gender,
             birth: user.birth,
             phone: user.phone);
@@ -69,6 +69,10 @@ class VerifyPhoneCubit extends Cubit<VerifyPhoneState> {
           sp.setDouble(
               'currentLocationLng', double.parse(data['location']['lng']));
         }
+      }
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+      if (fcmToken != null) {
+        AccountAPI.SetFCMToken(fcmToken);
       }
       sp.setBool('logedin', true);
       sp.setInt('authMethod', 2);

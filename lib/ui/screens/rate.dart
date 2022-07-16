@@ -82,8 +82,11 @@ class RatePage extends StatelessWidget {
                                       color: AppColors.gold1,
                                       size: 28,
                                     )),
-                                const SizedBox(
-                                  width: 16,
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width >= 350
+                                          ? 16
+                                          : 8,
                                 ),
                                 IconButton(
                                     onPressed: () =>
@@ -95,8 +98,11 @@ class RatePage extends StatelessWidget {
                                       color: AppColors.gold1,
                                       size: 28,
                                     )),
-                                const SizedBox(
-                                  width: 16,
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width >= 350
+                                          ? 16
+                                          : 8,
                                 ),
                                 IconButton(
                                     onPressed: () =>
@@ -108,8 +114,11 @@ class RatePage extends StatelessWidget {
                                       color: AppColors.gold1,
                                       size: 28,
                                     )),
-                                const SizedBox(
-                                  width: 16,
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width >= 350
+                                          ? 16
+                                          : 8,
                                 ),
                                 IconButton(
                                     onPressed: () =>
@@ -121,8 +130,11 @@ class RatePage extends StatelessWidget {
                                       color: AppColors.gold1,
                                       size: 28,
                                     )),
-                                const SizedBox(
-                                  width: 16,
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width >= 350
+                                          ? 16
+                                          : 8,
                                 ),
                                 IconButton(
                                     onPressed: () =>
@@ -155,8 +167,10 @@ class RatePage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Row(
                         children: [
-                          const SizedBox(
-                            width: 24,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width >= 350
+                                ? 24
+                                : 12,
                           ),
                           SizedBox(
                             width: 32,
@@ -191,11 +205,17 @@ class RatePage extends StatelessWidget {
                               barRadius: const Radius.circular(8),
                             ),
                           ),
-                          const SizedBox(
-                            width: 32,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width >= 350
+                                ? 32
+                                : 16,
                           ),
                           ConstrainedBox(
-                            constraints: const BoxConstraints(minWidth: 64),
+                            constraints: BoxConstraints(
+                                minWidth:
+                                    MediaQuery.of(context).size.width >= 350
+                                        ? 64
+                                        : 32),
                             child: Center(
                               child: Text(
                                 state.rateData![index]['count'].toString(),
@@ -207,8 +227,10 @@ class RatePage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 32,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width >= 350
+                                ? 32
+                                : 16,
                           ),
                         ],
                       ),

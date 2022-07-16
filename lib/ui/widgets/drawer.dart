@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user/ui/screens/locations.dart';
+import 'package:user/utilities/auth.dart';
 import 'package:user/utilities/colors.dart';
 import 'package:user/utilities/routes.dart';
 
@@ -92,7 +94,11 @@ class _AppDrawerState extends State<AppDrawer> {
                   Expanded(
                     child: InkWell(
                       splashColor: Colors.transparent,
-                      onTap: () => context.setLocale(const Locale('en')),
+                      onTap: () async {
+                        var sp = await SharedPreferences.getInstance();
+                        sp.setString('lang', 'en');
+                        context.setLocale(const Locale('en'));
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 24),
@@ -118,7 +124,11 @@ class _AppDrawerState extends State<AppDrawer> {
                   Expanded(
                     child: InkWell(
                       splashColor: Colors.transparent,
-                      onTap: () => context.setLocale(const Locale('ar')),
+                      onTap: () async {
+                        var sp = await SharedPreferences.getInstance();
+                        sp.setString('lang', 'ar');
+                        context.setLocale(const Locale('ar'));
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 24),
@@ -196,9 +206,30 @@ class _AppDrawerState extends State<AppDrawer> {
                             borderRadius: BorderRadius.circular(100)),
                         child: Switch(
                           value: enabled,
-                          onChanged: (v) {
-                            snap.data!.setBool('notifications', v);
-                            setState(() {});
+                          onChanged: (v) async {
+                            if (Platform.isIOS && v == true) {
+                              FirebaseMessaging messaging =
+                                  FirebaseMessaging.instance;
+
+                              NotificationSettings settings =
+                                  await messaging.requestPermission(
+                                alert: true,
+                                announcement: false,
+                                badge: true,
+                                carPlay: false,
+                                criticalAlert: false,
+                                provisional: false,
+                                sound: true,
+                              );
+                              if (settings.authorizationStatus ==
+                                  AuthorizationStatus.authorized) {
+                                snap.data!.setBool('notifications', v);
+                                setState(() {});
+                              }
+                            } else {
+                              snap.data!.setBool('notifications', v);
+                              setState(() {});
+                            }
                           },
                           inactiveThumbColor: Colors.grey.shade500,
                           activeTrackColor: Colors.grey.shade700,
@@ -244,7 +275,7 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           InkWell(
             onTap: () {
-              FirebaseAuth.instance.signOut();
+              logout();
               Navigator.of(context).pushNamedAndRemoveUntil(
                   RoutesGenerater.mainAuth, (_) => false);
             },

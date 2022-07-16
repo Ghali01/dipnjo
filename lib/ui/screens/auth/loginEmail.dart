@@ -12,10 +12,10 @@ import 'package:user/utilities/routes.dart';
 class LoginEmailPage extends StatelessWidget {
   LoginEmailPage({Key? key}) : super(key: key);
   // ghale001.wrok@gmail.com
-  final TextEditingController email =
-      TextEditingController(text: 'ghale001.wrok@gmail.com');
-  final TextEditingController password =
-      TextEditingController(text: '12345678');
+  final TextEditingController email = TextEditingController();
+  // TextEditingController(text: 'ghale001.wrok@gmail.com');
+  final TextEditingController password = TextEditingController();
+  // TextEditingController(text: '12345678');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -15,7 +15,18 @@ class ProfilePage extends StatelessWidget {
     return '${date.day}.${date.month}.$yr';
   }
 
+  GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController phoneController = TextEditingController();
+  String? phoneVaildation(String? text) {
+    if (text == null || text.isEmpty) {
+      return tr('enter vaild phone number');
+    }
+    RegExp re = RegExp(r'(^\+?\d{12}$)|(^\d{10}$)');
+    if (!re.hasMatch(text)) {
+      return tr('enter vaild phone number');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,17 +188,22 @@ class ProfilePage extends StatelessWidget {
                           children: [
                             Expanded(
                                 child: state.editing
-                                    ? TextField(
-                                        controller: phoneController
-                                          ..text = state.data!['phone'] ?? '',
-                                        decoration: const InputDecoration(
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: AppColors.brown2),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: AppColors.brown2),
+                                    ? Form(
+                                        key: formKey,
+                                        child: TextFormField(
+                                          validator: phoneVaildation,
+                                          keyboardType: TextInputType.phone,
+                                          controller: phoneController
+                                            ..text = state.data!['phone'] ?? '',
+                                          decoration: const InputDecoration(
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: AppColors.brown2),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: AppColors.brown2),
+                                            ),
                                           ),
                                         ),
                                       )
@@ -205,9 +221,14 @@ class ProfilePage extends StatelessWidget {
                                     ? const CircularProgressIndicator()
                                     : state.editing
                                         ? IconButton(
-                                            onPressed: () => context
-                                                .read<ProfileCubit>()
-                                                .save(phoneController.text),
+                                            onPressed: () {
+                                              if (formKey.currentState!
+                                                  .validate()) {
+                                                context
+                                                    .read<ProfileCubit>()
+                                                    .save(phoneController.text);
+                                              }
+                                            },
                                             icon: const Icon(
                                               Icons.done,
                                               color: AppColors.brown1,
@@ -223,34 +244,6 @@ class ProfilePage extends StatelessWidget {
                                             ),
                                           )
                           ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    decoration: const BoxDecoration(
-                        border: Border(
-                            bottom:
-                                BorderSide(color: Colors.black, width: .4))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'City',
-                          style:
-                              TextStyle(color: AppColors.brown1, fontSize: 18),
-                        ).tr(),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          state.data!['city'],
-                          style: const TextStyle(
-                              color: AppColors.brown2, fontSize: 18),
                         ),
                       ],
                     ),

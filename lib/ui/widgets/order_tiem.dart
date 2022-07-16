@@ -56,7 +56,10 @@ class OrderItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: history
-                ? Row(
+                ? Flex(
+                    direction: MediaQuery.of(context).size.width >= 350
+                        ? Axis.horizontal
+                        : Axis.vertical,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(

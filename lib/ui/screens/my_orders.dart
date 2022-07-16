@@ -26,7 +26,7 @@ class MyOrdersPage extends StatelessWidget {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 56),
-        child: AppAppBar(title: 'My Orders'),
+        child: AppAppBar(title: 'Your Orders'),
       ),
       body: BlocProvider(
         create: (context) => MyOrdersCubit(),

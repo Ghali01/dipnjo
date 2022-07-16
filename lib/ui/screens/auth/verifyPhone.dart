@@ -125,7 +125,7 @@ class VerifyPhone extends StatelessWidget {
                       child: Padding(
                         padding:
                             const EdgeInsets.only(top: 64, left: 16, right: 16),
-                        child: Column(
+                        child: ListView(
                           children: [
                             BlocSelector<VerifyPhoneCubit, VerifyPhoneState,
                                 List>(
@@ -135,7 +135,11 @@ class VerifyPhone extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      width: 50,
+                                      width:
+                                          MediaQuery.of(context).size.width >=
+                                                  400
+                                              ? 50
+                                              : 40,
                                       height: 40,
                                       child: TextField(
                                         controller: controller0,
@@ -172,12 +176,21 @@ class VerifyPhone extends StatelessWidget {
                                         },
                                       ),
                                     ),
-                                    const SizedBox(
-                                      width: 10,
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width >=
+                                                  400
+                                              ? 10
+                                              : 5,
                                     ),
                                     state[0]
                                         ? SizedBox(
-                                            width: 50,
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width >=
+                                                    600
+                                                ? 50
+                                                : 40,
                                             height: 40,
                                             child: TextField(
                                               controller: controller1,
@@ -223,12 +236,21 @@ class VerifyPhone extends StatelessWidget {
                                           )
                                         : Image.asset(
                                             'assets/images/donuts.png'),
-                                    const SizedBox(
-                                      width: 10,
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width >=
+                                                  400
+                                              ? 10
+                                              : 5,
                                     ),
                                     state[1]
                                         ? SizedBox(
-                                            width: 50,
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width >=
+                                                    600
+                                                ? 50
+                                                : 40,
                                             height: 40,
                                             child: TextField(
                                               maxLength: 1,
@@ -276,12 +298,21 @@ class VerifyPhone extends StatelessWidget {
                                           )
                                         : Image.asset(
                                             'assets/images/donuts.png'),
-                                    const SizedBox(
-                                      width: 10,
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width >=
+                                                  400
+                                              ? 10
+                                              : 5,
                                     ),
                                     state[2]
                                         ? SizedBox(
-                                            width: 50,
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width >=
+                                                    600
+                                                ? 50
+                                                : 40,
                                             height: 40,
                                             child: TextField(
                                               controller: controller3,
@@ -329,12 +360,21 @@ class VerifyPhone extends StatelessWidget {
                                           )
                                         : Image.asset(
                                             'assets/images/donuts.png'),
-                                    const SizedBox(
-                                      width: 10,
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width >=
+                                                  400
+                                              ? 10
+                                              : 5,
                                     ),
                                     state[3]
                                         ? SizedBox(
-                                            width: 50,
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width >=
+                                                    600
+                                                ? 50
+                                                : 40,
                                             height: 40,
                                             child: TextField(
                                               controller: controller4,
@@ -382,12 +422,21 @@ class VerifyPhone extends StatelessWidget {
                                           )
                                         : Image.asset(
                                             'assets/images/donuts.png'),
-                                    const SizedBox(
-                                      width: 10,
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width >=
+                                                  400
+                                              ? 10
+                                              : 5,
                                     ),
                                     state[4]
                                         ? SizedBox(
-                                            width: 50,
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width >=
+                                                    600
+                                                ? 50
+                                                : 40,
                                             height: 40,
                                             child: TextField(
                                               keyboardType:

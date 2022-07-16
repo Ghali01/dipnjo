@@ -11,7 +11,7 @@ class FoodAPI {
     throw Exception();
   }
 
-  static Future<String> getFoodSearch(
+  static Future<List<dynamic>> getFoodSearch(
       String path, String name, int category, int page) async {
     http.Response response = await Server.send(
       http.get,
@@ -22,7 +22,7 @@ class FoodAPI {
       },
     );
     if (response.statusCode == 200) {
-      return utf8.decode(response.bodyBytes);
+      return [utf8.decode(response.bodyBytes), name, category];
     }
 
     throw Exception();

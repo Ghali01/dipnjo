@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user/logic/controllers/home.dart';
 import 'package:user/logic/models/home.dart';
+import 'package:user/ui/screens/cart_item.dart';
 import 'package:user/ui/widgets/app_bar.dart';
 import 'package:user/ui/widgets/bottom_nav.dart';
 import 'package:user/ui/widgets/drawer.dart';
@@ -80,47 +81,57 @@ class HomePage extends StatelessWidget {
                     ),
                     child: CarouselSlider(
                       items: state.ads!
-                          .map((e) => Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            e['title'],
-                                            style: const TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                          Text(
-                                            e['subTitle'],
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                color: AppColors.brown3,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox.square(
-                                        dimension: 140,
-                                        child: Image.network(
-                                          Server.getAbsluteUrl(
-                                            e['imageUrl'],
-                                          ),
-                                          fit: BoxFit.contain,
+                          .map((e) => InkWell(
+                                splashColor: Colors.transparent,
+                                onTap: () => showBottomSheet(
+                                    context: context,
+                                    builder: (_) => CartItem(
+                                          id: e['food'],
+                                          status: CartItemStatus.paid,
+                                        )),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              e['title'],
+                                              style: const TextStyle(
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                            Text(
+                                              e['subTitle'],
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  color: AppColors.brown3,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    )
-                                  ],
+                                      Expanded(
+                                        child: SizedBox.square(
+                                          dimension: 140,
+                                          child: Image.network(
+                                            Server.getAbsluteUrl(
+                                              e['imageUrl'],
+                                            ),
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ))
                           .toList(),
@@ -146,7 +157,7 @@ class HomePage extends StatelessWidget {
                     height: 8,
                   ),
                   SizedBox(
-                    height: 300,
+                    height: 320,
                     child: ListView.builder(
                         itemCount: state.tops!.length,
                         scrollDirection: Axis.horizontal,

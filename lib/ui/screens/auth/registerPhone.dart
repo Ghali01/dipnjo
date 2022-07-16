@@ -17,13 +17,12 @@ class RegisterPhonePage extends StatefulWidget {
 }
 
 class _RegisterPhonePageState extends State<RegisterPhonePage> {
-  TextEditingController name = TextEditingController(text: 'ghale'),
-      // TextEditingController name = TextEditingController(text: ''),
-      // phone = TextEditingController(text: ''),
-      phone = TextEditingController(text: '+1 650-555-1234'),
-      date = TextEditingController(text: '2001-8-8'),
-      // city = TextEditingController(text: '');
-      city = TextEditingController(text: 'dara');
+  TextEditingController name = TextEditingController(),
+      // TextEditingController(text: 'ghale'),
+      phone = TextEditingController(),
+      // phone = TextEditingController(text: '+1 650-555-1234'),
+      date = TextEditingController();
+  // date = TextEditingController(text: '2001-8-8');
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -138,7 +137,6 @@ class _RegisterPhonePageState extends State<RegisterPhonePage> {
                                     user: RegisterPhoneUser(
                                       name: name.text,
                                       phone: phone.text,
-                                      city: city.text,
                                       birth: date.text,
                                       gender: context
                                           .read<RegisterPhoneCubit>()
@@ -193,6 +191,7 @@ class _RegisterPhonePageState extends State<RegisterPhonePage> {
                                 keyboardType: TextInputType.datetime,
                                 decoration: InputDecoration(
                                   hintText: tr('birthday'),
+                                  helperText: tr('ex: 1992-4-5'),
                                   prefixIcon: Icon(
                                     Icons.calendar_today_outlined,
                                     color: Colors.grey.shade600,
@@ -237,16 +236,19 @@ class _RegisterPhonePageState extends State<RegisterPhonePage> {
                                                 borderRadius:
                                                     BorderRadius.circular(8)),
                                             child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                const SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Icon(Icons.male,
-                                                    color: state == 'm'
-                                                        ? AppColors.brown3
-                                                        : Colors.grey.shade600),
-                                                const SizedBox(
-                                                  width: 16,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .only(start: 8),
+                                                  child: Icon(Icons.male,
+                                                      color: state == 'm'
+                                                          ? AppColors.brown3
+                                                          : Colors
+                                                              .grey.shade600),
                                                 ),
                                                 Text(
                                                   'Male',
@@ -293,16 +295,19 @@ class _RegisterPhonePageState extends State<RegisterPhonePage> {
                                                 borderRadius:
                                                     BorderRadius.circular(8)),
                                             child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                const SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Icon(Icons.female,
-                                                    color: state == 'f'
-                                                        ? AppColors.brown3
-                                                        : Colors.grey.shade600),
-                                                const SizedBox(
-                                                  width: 16,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .only(start: 8),
+                                                  child: Icon(Icons.female,
+                                                      color: state == 'f'
+                                                          ? AppColors.brown3
+                                                          : Colors
+                                                              .grey.shade600),
                                                 ),
                                                 Text(
                                                   'Female',
@@ -368,47 +373,6 @@ class _RegisterPhonePageState extends State<RegisterPhonePage> {
                               const SizedBox(
                                 height: 8,
                               ),
-                              TextFormField(
-                                cursorColor: AppColors.brown2,
-                                validator: isNotEmpty,
-                                controller: city,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  hintText: tr('city'),
-                                  prefixIcon: Icon(
-                                    Icons.location_on_outlined,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red.shade900)),
-                                  errorBorder: const OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.red)),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: .2, color: Colors.grey.shade600),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: .2, color: Colors.grey.shade600),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              BlocSelector<RegisterPhoneCubit,
-                                  RegisterPhoneState, String>(
-                                selector: (state) => state.error,
-                                builder: (context, state) => Text(
-                                  state,
-                                  style: const TextStyle(color: Colors.red),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
                               Builder(
                                   builder: (context) => InkWell(
                                         onTap: () {
@@ -419,7 +383,6 @@ class _RegisterPhonePageState extends State<RegisterPhonePage> {
                                                 .send(RegisterPhoneUser(
                                                   name: name.text,
                                                   phone: phone.text,
-                                                  city: city.text,
                                                   birth: date.text,
                                                   gender: context
                                                       .read<

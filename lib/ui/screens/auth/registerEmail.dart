@@ -17,13 +17,15 @@ class RegisterEmailPage extends StatefulWidget {
 }
 
 class _RegisterEmailPageState extends State<RegisterEmailPage> {
-  TextEditingController name = TextEditingController(text: 'ghale'),
-      // email = TextEditingController(text: ''),
-      email = TextEditingController(text: 'ghale001.wrok@gmail.com'),
-      password = TextEditingController(text: '12345678'),
-      // password = TextEditingController(text: ''),
-      date = TextEditingController(text: '2001-8-8'),
-      city = TextEditingController(text: 'damascus');
+  TextEditingController name =
+          // TextEditingController(text: 'ghale'),
+          TextEditingController(),
+      email = TextEditingController(),
+      // email = TextEditingController(text: 'ghale001.wrok@gmail.com'),
+      // password = TextEditingController(text: '12345678'),
+      password = TextEditingController(),
+      // date = TextEditingController(text: '2001-8-8');
+      date = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? isNotEmpty(String? text) {
@@ -241,16 +243,19 @@ class _RegisterEmailPageState extends State<RegisterEmailPage> {
                                                 borderRadius:
                                                     BorderRadius.circular(8)),
                                             child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                const SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Icon(Icons.male,
-                                                    color: state == 'm'
-                                                        ? AppColors.brown3
-                                                        : Colors.grey.shade600),
-                                                const SizedBox(
-                                                  width: 16,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .only(start: 8),
+                                                  child: Icon(Icons.male,
+                                                      color: state == 'm'
+                                                          ? AppColors.brown3
+                                                          : Colors
+                                                              .grey.shade600),
                                                 ),
                                                 Text(
                                                   'Male',
@@ -297,16 +302,19 @@ class _RegisterEmailPageState extends State<RegisterEmailPage> {
                                                 borderRadius:
                                                     BorderRadius.circular(8)),
                                             child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                const SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Icon(Icons.female,
-                                                    color: state == 'f'
-                                                        ? AppColors.brown3
-                                                        : Colors.grey.shade600),
-                                                const SizedBox(
-                                                  width: 16,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .only(start: 8),
+                                                  child: Icon(Icons.female,
+                                                      color: state == 'f'
+                                                          ? AppColors.brown3
+                                                          : Colors
+                                                              .grey.shade600),
                                                 ),
                                                 Text(
                                                   'Female',
@@ -349,38 +357,9 @@ class _RegisterEmailPageState extends State<RegisterEmailPage> {
                                 keyboardType: TextInputType.datetime,
                                 decoration: InputDecoration(
                                   hintText: tr('birthday'),
+                                  helperText: tr('ex: 1992-4-5'),
                                   prefixIcon: Icon(
                                     Icons.calendar_today_outlined,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red.shade900)),
-                                  errorBorder: const OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.red)),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: .2, color: Colors.grey.shade600),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: .2, color: Colors.grey.shade600),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                cursorColor: AppColors.brown2,
-                                validator: isNotEmpty,
-                                controller: city,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  hintText: tr('city'),
-                                  prefixIcon: Icon(
-                                    Icons.location_on_outlined,
                                     color: Colors.grey.shade600,
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
@@ -424,7 +403,6 @@ class _RegisterEmailPageState extends State<RegisterEmailPage> {
                                                   name: name.text,
                                                   email: email.text,
                                                   password: password.text,
-                                                  city: city.text,
                                                   birth: date.text, // TODO
                                                   gender: context
                                                       .read<

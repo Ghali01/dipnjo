@@ -167,96 +167,100 @@ class _LocationPermSheet extends StatelessWidget {
     return BottomSheet(
         enableDrag: false,
         onClosing: () {},
-        builder: (_) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  SizedBox.square(
-                    dimension: 128,
-                    child: Image.asset(
-                      'assets/images/map.png',
-                      fit: BoxFit.contain,
+        builder: (_) => SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(
+                      height: 24,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Allow Location Access',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Center(
-                    child: SizedBox(
-                      width: 330,
-                      child: Text(
-                        'locationPermText',
-                        textAlign: TextAlign.center,
+                    SizedBox.square(
+                      dimension: 128,
+                      child: Image.asset(
+                        'assets/images/map.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      'Allow Location Access',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Center(
+                      child: SizedBox(
+                        width: 330,
+                        child: Text(
+                          'locationPermText',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontSize: 18,
+                          ),
+                        ).tr(),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        Location location = Location();
+                        PermissionStatus status =
+                            await location.requestPermission();
+                        if (status == PermissionStatus.granted) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      child: const Text(
+                        'yes',
                         style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontSize: 18,
-                        ),
+                            fontSize: 22, fontWeight: FontWeight.bold),
                       ).tr(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      Location location = Location();
-                      PermissionStatus status =
-                          await location.requestPermission();
-                      if (status == PermissionStatus.granted) {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    child: const Text(
-                      'yes',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ).tr(),
-                    style: ButtonStyle(
-                      overlayColor: MaterialStateProperty.all(
-                          AppColors.brown1.withOpacity(.3)),
-                      backgroundColor:
-                          MaterialStateProperty.all(AppColors.brown4),
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.all(16),
+                      style: ButtonStyle(
+                        overlayColor: MaterialStateProperty.all(
+                            AppColors.brown1.withOpacity(.3)),
+                        backgroundColor:
+                            MaterialStateProperty.all(AppColors.brown4),
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.all(16),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text(
-                      'Not Now',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ).tr(),
-                    style: ButtonStyle(
-                      overlayColor: MaterialStateProperty.all(
-                          AppColors.brown1.withOpacity(.3)),
-                      backgroundColor:
-                          MaterialStateProperty.all(const Color(0xffF1F1F3)),
-                      foregroundColor:
-                          MaterialStateProperty.all(AppColors.brown1),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.all(16),
-                      ),
+                    const SizedBox(
+                      height: 8,
                     ),
-                  )
-                ],
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text(
+                        'Not Now',
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ).tr(),
+                      style: ButtonStyle(
+                        overlayColor: MaterialStateProperty.all(
+                            AppColors.brown1.withOpacity(.3)),
+                        backgroundColor:
+                            MaterialStateProperty.all(const Color(0xffF1F1F3)),
+                        foregroundColor:
+                            MaterialStateProperty.all(AppColors.brown1),
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.all(16),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ));
   }
@@ -285,100 +289,102 @@ class _LocationDialog extends StatelessWidget {
             height: 320,
             child: Form(
               key: formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      validator: isNotEmpty,
-                      controller: name,
-                      cursorColor: AppColors.brown2,
-                      decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: isNotEmpty,
+                        controller: name,
+                        cursorColor: AppColors.brown2,
+                        decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          focusedErrorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          errorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          hintText: tr("location name"),
                         ),
-                        focusedErrorBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        errorBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        hintText: tr("location name"),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextFormField(
-                      validator: isNotEmpty,
-                      maxLines: 2,
-                      minLines: 2,
-                      controller: address,
-                      cursorColor: AppColors.brown2,
-                      decoration: InputDecoration(
-                        enabledBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        focusedErrorBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        errorBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.brown2),
-                        ),
-                        hintText: tr("address"),
+                      const SizedBox(
+                        height: 16,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    BlocSelector<AddLocationCubit, AddLocationState, String>(
-                      selector: (state) => state.error,
-                      builder: (context, state) {
-                        return Text(
-                          state,
-                          style: const TextStyle(color: Colors.red),
-                        );
-                      },
-                    ),
-                    Builder(builder: (context) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            context
-                                .read<AddLocationCubit>()
-                                .save(name.text, address.text);
-                          }
+                      TextFormField(
+                        validator: isNotEmpty,
+                        maxLines: 2,
+                        minLines: 2,
+                        controller: address,
+                        cursorColor: AppColors.brown2,
+                        decoration: InputDecoration(
+                          enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          focusedErrorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          errorBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.brown2),
+                          ),
+                          hintText: tr("address"),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      BlocSelector<AddLocationCubit, AddLocationState, String>(
+                        selector: (state) => state.error,
+                        builder: (context, state) {
+                          return Text(
+                            state,
+                            style: const TextStyle(color: Colors.red),
+                          );
                         },
-                        child: Text("Add").tr(),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(AppColors.brown4),
-                          foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                        ),
-                      );
-                    }),
-                    BlocSelector<AddLocationCubit, AddLocationState, bool>(
-                      selector: (state) => state.loading,
-                      builder: (context, state) {
-                        return state
-                            ? const CircularProgressIndicator()
-                            : const SizedBox();
-                      },
-                    )
-                  ],
+                      ),
+                      Builder(builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              context
+                                  .read<AddLocationCubit>()
+                                  .save(name.text, address.text);
+                            }
+                          },
+                          child: Text("Add").tr(),
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(AppColors.brown4),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                          ),
+                        );
+                      }),
+                      BlocSelector<AddLocationCubit, AddLocationState, bool>(
+                        selector: (state) => state.loading,
+                        builder: (context, state) {
+                          return state
+                              ? const CircularProgressIndicator()
+                              : const SizedBox();
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
