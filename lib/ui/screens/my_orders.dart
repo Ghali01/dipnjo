@@ -106,7 +106,15 @@ class MyOrdersPage extends StatelessWidget {
                           .toList(),
                     );
                   },
-                )
+                ),
+                BlocSelector<MyOrdersCubit, MyOrdersState, bool>(
+                  selector: (state) => state.loading,
+                  builder: (context, state) => state
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : const SizedBox(),
+                ),
               ],
             );
           },

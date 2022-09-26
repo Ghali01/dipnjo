@@ -127,6 +127,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       onTap: () async {
                         var sp = await SharedPreferences.getInstance();
                         sp.setString('lang', 'ar');
+                        // print(sp.getString('lang'));
                         context.setLocale(const Locale('ar'));
                       },
                       child: Container(

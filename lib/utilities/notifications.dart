@@ -81,7 +81,7 @@ Future<void> handleNotification(RemoteMessage message) async {
 
 Future<String> translate(String key, {List<String>? args}) async {
   var sp = await SharedPreferences.getInstance();
-
+  // print(sp.getString('lang'));
   String trjs = await rootBundle
       .loadString('assets/translations/${sp.getString('lang') ?? 'en'}.json');
   var trData = jsonDecode(trjs);

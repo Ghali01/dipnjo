@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user/db/notification.dart';
@@ -14,9 +15,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'utilities/notifications.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:user/utilities/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -30,7 +33,8 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(handleNotification);
   await Hive.initFlutter();
   Hive.registerAdapter(NotificationModelAdapter());
-  print(await FirebaseMessaging.instance.getToken());
+  // print(await FirebaseMessaging.instance.getToken());
+  // logout();
   // print(FirebaseAuth.instance.currentUser!);
   // AccountAPI.SetFCMToken((await FirebaseMessaging.instance.getToken())!);
   // FirebaseAuth.instance.signOut();

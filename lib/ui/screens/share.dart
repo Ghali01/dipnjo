@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:user/logic/controllers/share.dart';
 import 'package:user/logic/models/share.dart';
 import 'package:user/ui/widgets/app_bar.dart';
@@ -193,42 +194,46 @@ class SharePage extends StatelessWidget {
                     ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(32),
-                      child: Stack(
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: SvgPicture.asset(
-                              'assets/svg/btn_bg.svg',
-                              height: 64,
-                              fit: BoxFit.fill,
+                      child: InkWell(
+                        onTap: () => Share.share(
+                            tr('MyCode', args: [state.code.toString()])),
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: SvgPicture.asset(
+                                'assets/svg/btn_bg.svg',
+                                height: 64,
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 64,
-                            child: Center(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Share",
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ).tr(),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                SvgPicture.asset(
-                                  'assets/svg/share.svg',
-                                  width: 24,
-                                  height: 24,
-                                )
-                              ],
-                            )),
-                          )
-                        ],
+                            SizedBox(
+                              width: double.infinity,
+                              height: 64,
+                              child: Center(
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "Share",
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ).tr(),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  SvgPicture.asset(
+                                    'assets/svg/share.svg',
+                                    width: 24,
+                                    height: 24,
+                                  )
+                                ],
+                              )),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
